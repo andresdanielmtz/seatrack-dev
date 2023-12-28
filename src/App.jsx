@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
+  axios.defaults.baseURL = `http://localhost:5000`
   const [profileData, setProfileData] = useState(null);
 
   function getData() {
@@ -30,9 +31,9 @@ function App() {
   return (
     <>
       <div>
-        <h3> This is working (probably) </h3>
+        <h3> Lorem Ipsum </h3>
 
-        <p>To get your profile details: </p>
+        <p>Sí esto muestra la información, el backend se conectó con el frontend: </p>
         <button onClick={getData}>Click me</button>
         {profileData && (
           <div>
