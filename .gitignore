@@ -29,4 +29,6 @@ backend/.flaskenv
 backend/coords.db
 backend/flask_session
 
+src/util/hash.py
+
 .db

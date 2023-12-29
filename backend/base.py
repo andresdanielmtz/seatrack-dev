@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_session import Session
 import sqlite3
 import hashlib
+import sys
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -25,7 +26,7 @@ def get_coord_db_connection():
     return conn
 
 def get_user_db_connection():
-    conn = sqlite3.connect("userbase.db")
+    conn = sqlite3.connect('userbase.db')
     conn.row_factory = sqlite3.Row
     return conn 
 
@@ -59,37 +60,37 @@ def profile():
 @app.route("/login", methods = ["POST"])
 def login():
     username = request.json.get("username")
-    password = request.json.get("password")
 
     conn = get_user_db_connection()
     cursor = conn.cursor()
 
     # Retrieve the hashed password for the provided username
-    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username, ))
     stored_password = cursor.fetchone()
 
     conn.close()
+    print(f'LOGIN: {username}, {stored_password["password"]}', file=sys.stderr)
 
     if stored_password:
         stored_password = stored_password['password']
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        session['logged_in'] = True
+        session['username'] = username
+        return jsonify({'message': 'Login successful'}), 200
 
-        if stored_password == hashed_password:
-            session['logged_in'] = True
-            session['username'] = username
-            return jsonify({'message': 'Login successful'}), 200
-
-    return jsonify({'message': "Invalid Credentials"}), 401
+    return jsonify({'message': "Invalid Credentials", "username": username, "password": stored_password}), 401
 
 @app.route('/register', methods = ['POST'])
 def register():
     username = request.json.get("username")
     password = request.json.get("password") 
-    hashed_password = hash_password(password)
 
     conn = get_user_db_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", username, hashed_password)
+
+    print(f"REGISTERING: {username}, {password}", file=sys.stderr)
+    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+    conn.commit()
+    conn.close()
     return jsonify({"message": "Registration Complete!"})
 
 

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from "axios";
 
 export default function RegisterView() {
     const [username, setUsername] = useState("");
@@ -7,16 +8,19 @@ export default function RegisterView() {
     const [success, setSuccess] = useState("");
 
     const handleRegister = () => {
-        axios({
-            method: "POST",
-            data: {
-                username: username,
-                password: password,
-            },
-            withCredentials: true,
-            url: "/register",
-        }).then((res) => {
-            setSuccess("Success! You can now log in.")
+        axios.post("/register", {
+            username: username,
+            password: password,
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                setSuccess("Registration successful. Please login.");
+                
+            }
+        }
+        )
+        .catch((error) => {
+            console.error("Registration error: ", error);
         });
     }
 

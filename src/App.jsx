@@ -21,6 +21,7 @@ function App() {
       })
     
       .catch((error) => {
+        console.log(`Credentials: \'${username}\', \'${password}\'`);
         console.error("Login error: ", error);
         setError("Error logging in please try again");
             });
@@ -37,6 +38,7 @@ function App() {
       .catch((error) => {
         console.error("Logout error: ", error);
         // Handle logout error, e.g., display an error message
+        console.log(error.message);
       });
   };
 
@@ -67,6 +69,7 @@ function App() {
           <button onClick={handleLogin}>Login</button>
         </div>
        
+        <RegisterView />
           </>
       )}
     </div>
