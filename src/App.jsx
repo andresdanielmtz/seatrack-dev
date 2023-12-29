@@ -20,7 +20,7 @@ function App() {
 
   const handleLogin = () => {
     axios
-      .post("http://localhost:5000/login", { username, password })
+      .post("/login", { username, password })
       .then((response) => {
         if (response.status === 200) {
           setIsLoggedIn(true);
@@ -37,7 +37,7 @@ function App() {
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:5000/logout")
+      .get("/logout")
       .then((response) => {
         if (response.status === 200) {
           setIsLoggedIn(false);
