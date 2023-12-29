@@ -1,48 +1,76 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import axios from "axios";
 import "./App.css";
+import MainView from "./view/home.jsx";
+import RegisterView from "./view/register/register.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`
-  const [profileData, setProfileData] = useState(null);
 
-  function getData() {
-    axios({
-      method: "GET",
-      url: "/profile",
-    })
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error , setError] = useState(null);
+  const handleLogin = () => {
+    axios.post("http://localhost:5000/login", { username, password })
       .then((response) => {
-        console.log(response);
-        const res = response.data;
-        setProfileData({
-          profile_name: res.name,
-          about_me: res.about,
-        });
+        if (response.status === 200) {
+          setIsLoggedIn(true);
+          // Additional logic upon successful login if needed
+        }
+      })
+    
+      .catch((error) => {
+        console.error("Login error: ", error);
+        setError("Error logging in please try again");
+            });
+  };
+
+  const handleLogout = () => {
+    axios.get("http://localhost:5000/logout")
+      .then((response) => {
+        if (response.status === 200) {
+          setIsLoggedIn(false);
+          // Additional logic upon successful logout if needed
+        }
       })
       .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
+        console.error("Logout error: ", error);
+        // Handle logout error, e.g., display an error message
       });
-  }
+  };
+
+
 
   return (
-    <>
-      <div>
-        <h3> Lorem Ipsum </h3>
+    <div>
+      {isLoggedIn ? (
+        <div>
+          <MainView username = {username}/>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <>
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleLogin}>Login</button>
+        </div>
+       
+          </>
+      )}
+    </div>
 
-        <p>Sí esto muestra la información, el backend se conectó con el frontend: </p>
-        <button onClick={getData}>Click me</button>
-        {profileData && (
-          <div>
-            <p>Profile name: {profileData.profile_name}</p>
-            <p>About me: {profileData.about_me}</p>
-          </div>
-        )}
-      </div>
-    </>
   );
 }
 
