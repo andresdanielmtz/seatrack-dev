@@ -35,3 +35,4 @@ src/util/hash.py
 # Database files
 coords.db
 userbase.db
+.flaskenv
