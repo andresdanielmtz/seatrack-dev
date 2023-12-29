@@ -1,8 +1,8 @@
 import { useState, useEffect  } from "react";
 import axios from "axios";
 import "./App.css";
-import MainView from "./view/home.jsx";
-import RegisterView from "./view/register/register.jsx";
+import MainView from "./view/Home.jsx";
+import RegisterView from "./view/register/Register.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`
