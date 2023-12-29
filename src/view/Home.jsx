@@ -3,29 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function MainView({ username }) {
-  const [profileData, setProfileData] = useState(null);
   const [coords, setCoords] = useState(null);
+  const [showCoords, setShowCoords] = useState(false);
 
-  function getData() {
-    axios({
-      method: "GET",
-      url: "/profile",
-    })
-      .then((response) => {
-        const res = response.data;
-        setProfileData({
-          profile_name: res.name,
-          about_me: res.about,
-        });
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-      });
-  }
+  const [content, setContent] = useState([]);
 
   function getCoords() {
     axios({
@@ -34,11 +15,9 @@ function MainView({ username }) {
     })
       .then((response) => {
         const res = response.data;
-        console.log(res);
-        setCoords({
-          lat: res[0].latitude,
-          long: res[0].longitude,
-        });
+        const names = res.map(item => item.name); // get only the names
+        setContent(names);
+
       })
       .catch((error) => {
         if (error.response) {
@@ -49,13 +28,14 @@ function MainView({ username }) {
       });
   }
 
-    useEffect(() => {
-        getCoords();
-    }, []);
+  function buttonCoords() {
+    getCoords();
+    setShowCoords(!showCoords);
+  }
 
-    useEffect(() => {
-        console.log(coords);
-    }, [coords]);
+  useEffect(() => {
+    getCoords();
+  }, []);
 
   return (
     <div>
@@ -64,20 +44,18 @@ function MainView({ username }) {
       <p>
         Sí esto muestra la información, el backend se conectó con el frontend:{" "}
       </p>
-      <button onClick={getData}>Click me</button>
-      {profileData && (
-        <div>
-          <p>Profile name: {profileData.profile_name}</p>
-          <p>About me: {profileData.about_me}</p>
-        </div>
-      )}
-      {coords && (
-        <div>
-            <p>{coords.lat}</p>
-            <p>{coords.long}</p>
-         
-        </div>
-      )}
+
+      <button onClick={buttonCoords}> Get Coordinates </button>
+
+      <h3> Upload Coordinates </h3>
+      <form action="/upload_coords" method="POST">
+        <label htmlFor="lat">Latitude:</label>
+        <input type="text" name="lat" />
+        <label htmlFor="long">Longitude:</label>
+        <input type="text" name="long" />
+        <input type="submit" value="Submit" />
+      </form>
+
     </div>
   );
 }
