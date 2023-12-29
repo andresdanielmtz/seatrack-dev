@@ -32,3 +32,6 @@ backend/*.db
 src/util/hash.py
 *.db
 *.flaskenv
+# Database files
+coords.db
+userbase.db
