@@ -25,10 +25,10 @@ dist-ssr
 
 backend/env
 backend/__pycache__
-backend/.flaskenv
-backend/coords.db
+backend/*.flaskenv
 backend/flask_session
+backend/*.db
 
 src/util/hash.py
-
-.db
+*.db
+*.flaskenv

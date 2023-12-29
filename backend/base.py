@@ -30,7 +30,7 @@ def get_user_db_connection():
     conn.row_factory = sqlite3.Row
     return conn 
 
-@app.route("/coords", methods=["POST", "GET"])
+@app.route("/coords", methods=["GET"])
 def coords():
     conn = get_coord_db_connection()
     cursor = conn.cursor()
@@ -69,7 +69,7 @@ def login():
     stored_password = cursor.fetchone()
 
     conn.close()
-    print(f'LOGIN: {username}, {stored_password["password"]}', file=sys.stderr)
+    print(f'LOGIN: {username}', file=sys.stderr)
 
     if stored_password:
         stored_password = stored_password['password']

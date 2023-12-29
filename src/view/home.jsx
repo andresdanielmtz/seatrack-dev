@@ -27,6 +27,36 @@ function MainView({ username }) {
       });
   }
 
+  function getCoords() {
+    axios({
+      method: "GET",
+      url: "/coords",
+    })
+      .then((response) => {
+        const res = response.data;
+        console.log(res);
+        setCoords({
+          lat: res[0].latitude,
+          long: res[0].longitude,
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  }
+
+    useEffect(() => {
+        getCoords();
+    }, []);
+
+    useEffect(() => {
+        console.log(coords);
+    }, [coords]);
+
   return (
     <div>
       <h3> Welcome, {username} </h3>
@@ -41,8 +71,13 @@ function MainView({ username }) {
           <p>About me: {profileData.about_me}</p>
         </div>
       )}
-
-      <p> After anything else </p>
+      {coords && (
+        <div>
+            <p>{coords.lat}</p>
+            <p>{coords.long}</p>
+         
+        </div>
+      )}
     </div>
   );
 }
