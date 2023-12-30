@@ -1,8 +1,7 @@
 from flask import Flask, session, jsonify, request
 from flask_cors import CORS
 from flask_session import Session
-import sqlite3
-import hashlib
+from utils.utils import get_coord_db_connection, get_user_db_connection, hash_password
 import sys
 
 app = Flask(__name__)
@@ -14,23 +13,6 @@ CORS(app)
 Session(app)
 
 SESSION_TYPE = "redis"
-
-
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
-
-# Route to establish a connection to the SQLite database
-def get_coord_db_connection():
-    conn = sqlite3.connect("coords.db")
-    conn.row_factory = sqlite3.Row
-    return conn
-
-
-def get_user_db_connection():
-    conn = sqlite3.connect("userbase.db")
-    conn.row_factory = sqlite3.Row
-    return conn
 
 
 @app.route("/coords", methods=["GET"])
