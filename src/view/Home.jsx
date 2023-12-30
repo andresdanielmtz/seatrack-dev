@@ -17,6 +17,7 @@ function MainView({ username }) {
         const res = response.data;
         const names = res.map(item => item.name); // get only the names
         setContent(names);
+        console.log(names);
 
       })
       .catch((error) => {
