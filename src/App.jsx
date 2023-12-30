@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 import MainView from "./view/Home.jsx";
 import RegisterView from "./view/register/Register.jsx";
-import MapView from "./view/map/Map.jsx";
+import MapView from "./view/map/MapView.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
@@ -57,7 +57,7 @@ function App() {
         <div>
           {showMap ? (
             <div>
-              <MapView />
+              <MapView zoom = {2}/>
               <button onClick={handleLogout}>Logout</button>
               <button onClick={toggleMap}>Toggle Map</button>
             </div>
