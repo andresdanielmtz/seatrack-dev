@@ -15,7 +15,7 @@ Session(app)
 SESSION_TYPE = "redis"
 
 
-@app.route("/coords", methods=["GET"])
+@app.route("/coords", methods=["GET", "POST"])
 def coords():
     conn = get_coord_db_connection()
     cursor = conn.cursor()
@@ -31,6 +31,25 @@ def coords():
     conn.close()
 
     return jsonify(result)  # Return JSON response
+
+
+@app.route("/register_coord", methods=["POST"])
+def register_coord():
+    lat = request.json.get("latitude")
+    lng = request.json.get("longitude")
+    name = request.json.get("name")
+
+    conn = get_coord_db_connection()
+    cursor = conn.cursor()
+
+    print(f"REGISTERING: {lat}, {lng}, {name}", file=sys.stderr)
+    cursor.execute(
+        "INSERT INTO Location (name, latitude, longitude) VALUES (?, ?, ?)",
+        (name, lat, lng),
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Registration Complete!"})
 
 
 @app.route("/profile")

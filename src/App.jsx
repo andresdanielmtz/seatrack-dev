@@ -7,6 +7,7 @@ import MapView from "./view/map/MapView.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
+  
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");

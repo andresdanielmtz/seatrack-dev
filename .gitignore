@@ -36,3 +36,4 @@ src/util/hash.py
 coords.db
 userbase.db
 .flaskenv
+start_db.sql

@@ -6,6 +6,10 @@ function MainView({ username }) {
   const [coords, setCoords] = useState(null);
   const [showCoords, setShowCoords] = useState(false);
 
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [name, setName] = useState("");
+
   const [content, setContent] = useState([]);
 
   function getCoords() {
@@ -15,10 +19,9 @@ function MainView({ username }) {
     })
       .then((response) => {
         const res = response.data;
-        const names = res.map(item => item.name); // get only the names
+        const names = res.map((item) => item.name); // get only the names
         setContent(names);
         console.log(names);
-
       })
       .catch((error) => {
         if (error.response) {
@@ -26,6 +29,25 @@ function MainView({ username }) {
           console.log(error.response.status);
           console.log(error.response.headers);
         }
+      });
+  }
+
+  function uploadCoords() {
+    axios({
+      method: "POST",
+      url: "/register_coord",
+      data: {
+        name: name,
+        latitude: latitude,
+        longitude: longitude,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        getCoords();
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -41,22 +63,33 @@ function MainView({ username }) {
   return (
     <div>
       <h3> Welcome, {username} </h3>
-
-      <p>
+      <i>
         Sí esto muestra la información, el backend se conectó con el frontend:{" "}
-      </p>
-
+      </i>{" "}
+      <br />
       <button onClick={buttonCoords}> Get Coordinates </button>
-
       <h3> Upload Coordinates </h3>
-      <form action="/upload_coords" method="POST">
-        <label htmlFor="lat">Latitude:</label>
-        <input type="text" name="lat" />
-        <label htmlFor="long">Longitude:</label>
-        <input type="text" name="long" />
-        <input type="submit" value="Submit" />
-      </form>
-
+      <div>
+        <input
+          type="text"
+          placeholder="Username"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Latitude"
+          value={latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Longitude"
+          value={longitude}
+          onChange={(e) => setLongitude(e.target.value)}
+        />
+        <button onClick={uploadCoords}> Upload </button>
+      </div>
     </div>
   );
 }
