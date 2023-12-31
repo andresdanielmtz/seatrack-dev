@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterView() {
@@ -31,7 +31,6 @@ export default function RegisterView() {
   return (
     <>
       <h2> Alternatively, you can register here: </h2>
-      <ToastContainer />
       <div>
         <input
           type="text"

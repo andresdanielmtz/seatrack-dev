@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
@@ -9,6 +9,7 @@ import "ol/ol.css";
 function MapView({ zoom = 1 }) {
   const ref = useRef(null);
   const mapRef = useRef(null);
+
   useEffect(() => {
     console.log("I'm mounting!");
     if (ref.current && !mapRef.current) {
