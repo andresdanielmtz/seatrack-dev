@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleRegister = () => {
     axios
@@ -45,6 +48,8 @@ export default function RegisterView() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={handleRegister}>Register</button>
+        <br/>
+        <button onClick={() => navigate("/")}>Return to Home</button>
       </div>
     </>
   );
