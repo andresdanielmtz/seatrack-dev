@@ -1,5 +1,6 @@
-## Seatrack Dev 
-### Webapp Focused on Tracking Sea Trash and Plastic Pollution
+## Seatrack Dev
+
+### A Webapp Focused on Tracking Sea Trash and Plastic Pollution
 
 ## Installation
 
@@ -15,8 +16,7 @@ npm install
 
 To run this project, use the following command:
 
-
-### Frontend 
+### Frontend
 
 ```bash
 npm run dev
@@ -33,8 +33,5 @@ npm run build
 To run the backend, use the following command:
 
 ```bash
-npm run backend-start
+npm run start-backend
 ```
-
-
-
