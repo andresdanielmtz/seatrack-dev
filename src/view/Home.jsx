@@ -2,14 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function MainView({ username }) {
   const [coords, setCoords] = useState(null);
   const [showCoords, setShowCoords] = useState(false);
-
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [name, setName] = useState("");
-
   const [content, setContent] = useState([]);
 
   function getCoords() {
@@ -45,9 +46,11 @@ function MainView({ username }) {
       .then((response) => {
         console.log(response);
         getCoords();
+        toast.success("Coordinates uploaded successfully!"); // Show success notification
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Error uploading coordinates. Please try again."); // Show error notification
       });
   }
 
@@ -90,6 +93,7 @@ function MainView({ username }) {
         />
         <button onClick={uploadCoords}> Upload </button>
       </div>
+      <ToastContainer />
     </div>
   );
 }

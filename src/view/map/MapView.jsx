@@ -3,9 +3,7 @@ import axios from "axios";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
-
 import { addMarkerToMap } from "../../utils/api";
-
 import "ol/ol.css";
 
 function MapView({ zoom = 1 }) {
