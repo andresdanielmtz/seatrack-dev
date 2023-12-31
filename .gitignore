@@ -37,3 +37,5 @@ coords.db
 userbase.db
 .flaskenv
 start_db.sql
+
+TODO.md

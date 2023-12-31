@@ -102,6 +102,13 @@ def register():
     conn = get_user_db_connection()
     cursor = conn.cursor()
 
+    # Check if username already exists
+    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    existing_user = cursor.fetchone()
+
+    if existing_user:
+        return jsonify({"message": "Username already exists"}), 409
+
     print(f"REGISTERING: {username}, {password}", file=sys.stderr)
     cursor.execute(
         "INSERT INTO users (username, password) VALUES (?, ?)", (username, password)

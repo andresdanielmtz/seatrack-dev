@@ -5,14 +5,15 @@ import MainView from "./view/Home.jsx";
 import RegisterView from "./view/register/Register.jsx";
 import MapView from "./view/map/MapView.jsx";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
-  
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [showMap, setShowMap] = useState(false);
 
   function toggleMap() {
@@ -25,14 +26,14 @@ function App() {
       .then((response) => {
         if (response.status === 200) {
           setIsLoggedIn(true);
-          // Additional logic upon successful login if needed
+          toast.success("Login successful!"); // Show success notification
         }
       })
 
       .catch((error) => {
         console.log(`Credentials: \'${username}\', \'${password}\'`);
         console.error("Login error: ", error);
-        setError("Error logging in please try again");
+        toast.error("Error logging in. Please try again."); // Show error notification
       });
   };
 
@@ -42,23 +43,25 @@ function App() {
       .then((response) => {
         if (response.status === 200) {
           setIsLoggedIn(false);
-          // Additional logic upon successful logout if needed
+          toast.success("Logout successful!"); // Show success notification
         }
       })
       .catch((error) => {
         console.error("Logout error: ", error);
         // Handle logout error, e.g., display an error message
         console.log(error.message);
+        toast.error("Error logging out. Please try again."); // Show error notification
       });
   };
 
   return (
     <div>
+      <ToastContainer />
       {isLoggedIn ? (
         <div>
           {showMap ? (
             <div>
-              <MapView zoom = {2}/>
+              <MapView zoom={2} />
               <button onClick={handleLogout}>Logout</button>
               <button onClick={toggleMap}>Toggle Map</button>
             </div>
@@ -91,7 +94,6 @@ function App() {
         </>
       )}
     </div>
-
   );
 }
 
