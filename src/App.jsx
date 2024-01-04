@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Routes from "./Routes.jsx";
+import Routing from "./Routes.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
@@ -49,7 +49,7 @@ function App() {
           draggable
           pauseOnHover
         />
-        <Routes
+        <Routing
           setIsLoggedIn={setIsLoggedIn}
           setUsername={setUsername}
           isLoggedIn={isLoggedIn}
