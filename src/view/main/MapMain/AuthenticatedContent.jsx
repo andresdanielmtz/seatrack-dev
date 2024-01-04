@@ -3,6 +3,7 @@ import React from "react";
 import MapView from "../../map/MapView.jsx";
 import MainView from "../../Home.jsx";
 import { Link } from "react-router-dom";
+import MainTitleView from "../MainTitle/MainTitleView.jsx";
 
 const AuthenticatedContent = ({
   isLoggedIn,
@@ -30,11 +31,7 @@ const AuthenticatedContent = ({
           )}
         </div>
       ) : (
-        <div>
-          <h1 className="text-3xl font-bold underline">Login</h1>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </div>
+        <MainTitleView />
       )}
     </div>
   );

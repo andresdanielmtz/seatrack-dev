@@ -4,7 +4,7 @@ import { Route, Link, Routes, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import RegisterView from "./view/register/Register.jsx";
+import RegisterView from "./view/main/register/RegisterView.jsx";
 import LoginView from "./view/main/LoginMain/LoginMainView.jsx";
 import AuthenticatedContent from "./view/main/MapMain/AuthenticatedContent.jsx";
 import AboutView from "./view/about/AboutView.jsx";
