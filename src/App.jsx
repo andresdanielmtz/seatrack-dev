@@ -4,16 +4,17 @@ import { Route, Link, Routes, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import MainView from "./view/Home.jsx";
 import RegisterView from "./view/register/Register.jsx";
-import MapView from "./view/map/MapView.jsx";
-import LoginView from "./view/main/LoginMainView.jsx";
+import LoginView from "./view/main/LoginMain/LoginMainView.jsx";
+import AuthenticatedContent from "./view/main/MapMain/AuthenticatedContent.jsx";
+import AboutView from "./view/about/AboutView.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(""); // Local state for username
   const [showMap, setShowMap] = useState(false);
 
   function toggleMap() {
@@ -55,47 +56,27 @@ function App() {
         <Routes>
           <Route
             path="/login"
-            element={<LoginView setIsLoggedIn={setIsLoggedIn} />}
+            element={
+              <LoginView
+                setIsLoggedIn={setIsLoggedIn}
+                setUsername={setUsername}
+              />
+            }
           ></Route>
 
           <Route path="/register" element={<RegisterView />}></Route>
-
-          <Route
-            path="/about"
-            element={
-              <div>
-                <div className="text-3xl font-bold underline">About</div>
-                <div className="text-xl font-bold underline">Team Members</div>
-              </div>
-            }
-          ></Route>
+          <Route path="/about" element={<AboutView />}></Route>
 
           <Route
             path="/"
             element={
-              isLoggedIn ? (
-                <div>
-                  {showMap ? (
-                    <div>
-                      <MapView zoom={2} />
-                      <button onClick={handleLogout}>Logout</button>
-                      <button onClick={toggleMap}>Toggle Map</button>
-                    </div>
-                  ) : (
-                    <div>
-                      <MainView username={username} />
-                      <button onClick={handleLogout}>Logout</button>
-                      <button onClick={toggleMap}>Toggle Map</button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div>
-                  <h1 className="text-3xl font-bold underline">Login</h1>
-                  <Link to="/login">Login</Link>
-                  <Link to="/register">Register</Link>
-                </div>
-              )
+              <AuthenticatedContent
+                isLoggedIn={isLoggedIn}
+                showMap={showMap}
+                username={username}
+                handleLogout={handleLogout}
+                toggleMap={toggleMap}
+              />
             }
           />
         </Routes>
