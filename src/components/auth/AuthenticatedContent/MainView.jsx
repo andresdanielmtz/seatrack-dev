@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function MainView({ username }) {
@@ -58,7 +58,7 @@ function MainView({ username }) {
         />
         <button onClick={uploadCoords}> Upload </button>
       </div>
-      <ToastContainer />
+
     </div>
   );
 }

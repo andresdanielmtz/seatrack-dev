@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Route, Link, Routes, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import RegisterView from "./view/main/register/RegisterView.jsx";
-import LoginView from "./view/main/LoginMain/LoginMainView.jsx";
-import AuthenticatedContent from "./view/main/MapMain/AuthenticatedContent.jsx";
-import AboutView from "./view/about/AboutView.jsx";
+import Routes from "./Routes.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
@@ -52,34 +49,15 @@ function App() {
           draggable
           pauseOnHover
         />
-
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <LoginView
-                setIsLoggedIn={setIsLoggedIn}
-                setUsername={setUsername}
-              />
-            }
-          ></Route>
-
-          <Route path="/register" element={<RegisterView />}></Route>
-          <Route path="/about" element={<AboutView />}></Route>
-
-          <Route
-            path="/"
-            element={
-              <AuthenticatedContent
-                isLoggedIn={isLoggedIn}
-                showMap={showMap}
-                username={username}
-                handleLogout={handleLogout}
-                toggleMap={toggleMap}
-              />
-            }
-          />
-        </Routes>
+        <Routes
+          setIsLoggedIn={setIsLoggedIn}
+          setUsername={setUsername}
+          isLoggedIn={isLoggedIn}
+          showMap={showMap}
+          handleLogout={handleLogout}
+          toggleMap={toggleMap}
+          username={username}
+        />
       </div>
     </div>
   );
