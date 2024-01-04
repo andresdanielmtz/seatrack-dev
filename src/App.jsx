@@ -7,35 +7,18 @@ import "./App.css";
 import MainView from "./view/Home.jsx";
 import RegisterView from "./view/register/Register.jsx";
 import MapView from "./view/map/MapView.jsx";
+import LoginView from "./view/main/LoginMainView.jsx";
 
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showMap, setShowMap] = useState(false);
 
   function toggleMap() {
     setShowMap(!showMap);
   }
-
-  const handleLogin = () => {
-    axios
-      .post("/login", { username, password })
-      .then((response) => {
-        if (response.status === 200) {
-          setIsLoggedIn(true);
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.log(`Credentials: \'${username}\', \'${password}\'`);
-        console.error("Login error: ", error);
-        toast.error("Error logging in. Please try again."); // Show error notification
-      });
-  };
 
   const handleLogout = () => {
     axios
@@ -72,26 +55,7 @@ function App() {
         <Routes>
           <Route
             path="/login"
-            element={
-              <div>
-                <h1 className="text-3xl font-bold underline">Login</h1>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button onClick={handleLogin}>Login</button>
-                <br />
-                <button onClick={() => navigate("/")}>Return to Home</button>
-              </div>
-            }
+            element={<LoginView setIsLoggedIn={setIsLoggedIn} />}
           ></Route>
 
           <Route path="/register" element={<RegisterView />}></Route>
