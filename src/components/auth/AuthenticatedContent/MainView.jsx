@@ -58,7 +58,6 @@ function MainView({ username }) {
         />
         <button onClick={uploadCoords}> Upload </button>
       </div>
-
     </div>
   );
 }

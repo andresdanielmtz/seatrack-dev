@@ -42,17 +42,22 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-amber-100">
       <h1 className="text-4xl font-extrabold my-10">Login</h1>
+      {/* Username input */}
       <input
         type="text"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsernameLocal(e.target.value)}
+        className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500"
       />
+
+      {/* Password input */}
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500"
       />
 
       <div className="flex flex-col justify-between my-10">

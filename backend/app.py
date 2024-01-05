@@ -10,6 +10,12 @@ app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config["SESSION_TYPE"] = "filesystem"
 app.config.from_object(__name__)
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_PERMANENT"] = True  # Make the session cookie persistent
+app.config["PERMANENT_SESSION_LIFETIME"] = (
+    3600 * 24 * 7
+)  # Set the lifetime to 1 week (adjust as needed)
+
 
 CORS(app)
 Session(app)
@@ -21,4 +27,4 @@ app.register_blueprint(profile_blueprint)
 SESSION_TYPE = "redis"
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5000, debug=True)

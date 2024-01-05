@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function ProfileView() {
@@ -16,7 +17,7 @@ export default function ProfileView() {
       }
     };
     fetchData();
-  }, []); 
+  }, []);
 
   return (
     <div>
@@ -24,9 +25,13 @@ export default function ProfileView() {
       {name ? (
         <p>
           {name} <br /> {about}
+          <br />
+          <Link to="/">Home</Link>
         </p>
       ) : (
-        <p>Loading profile content...</p>
+        <div>
+          <p>Loading profile content...</p>
+        </div>
       )}
     </div>
   );
