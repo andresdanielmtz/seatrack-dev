@@ -42,6 +42,12 @@ def login():
     return jsonify(response), response["status"]
 
 
+@auth_blueprint.route("/logout", methods=["GET"])
+def logout():
+    session.clear()
+    return jsonify({"message": "Logged out"})
+
+
 @auth_blueprint.route("/register", methods=["POST"])
 def register():
     username = request.json.get("username")
