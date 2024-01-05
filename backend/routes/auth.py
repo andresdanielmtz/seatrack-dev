@@ -1,5 +1,5 @@
 from flask import session, jsonify, request, Blueprint
-from utils.utils import get_user_db_connection
+from utils.utils import get_user_db_connection, hash_password
 import sys
 
 auth_blueprint = Blueprint("auth", __name__)
@@ -8,36 +8,38 @@ auth_blueprint = Blueprint("auth", __name__)
 @auth_blueprint.route("/login", methods=["POST"])
 def login():
     username = request.json.get("username")
-
+    password = request.json.get("password")
+    print("LOGGING IN: ", username, file=sys.stderr)
     try:
         conn = get_user_db_connection()
         cursor = conn.cursor()
-    except:
-        print("Error connecting to database", file=sys.stderr)
 
-    # Retrieve the hashed password for the provided username
-    cursor.execute("SELECT password FROM users WHERE username = ?", (username,))
-    stored_password = cursor.fetchone()
+        # Retrieve the hashed password for the provided username
+        cursor.execute("SELECT password FROM users WHERE username = ?", (username,))
+        stored_password = cursor.fetchone()
 
-    conn.close()
-    print(f"LOGIN: {username}", file=sys.stderr)
+        if stored_password:
+            stored_password = stored_password["password"]
 
-    if stored_password:
-        stored_password = stored_password["password"]
-        session["logged_in"] = True
-        session["username"] = username
-        return jsonify({"message": "Login successful"}), 200
+            # Compare hashed passwords
+            if stored_password == hash_password(password):
+                session["logged_in"] = True
+                session["username"] = username
+                response = {"message": "Login successful", "status": 200}
+            else:
+                response = {"message": "Invalid Credentials", "status": 401}
+        else:
+            response = {"message": "Invalid Credentials", "status": 401}
 
-    return (
-        jsonify(
-            {
-                "message": "Invalid Credentials",
-                "username": username,
-                "password": stored_password,
-            }
-        ),
-        401,
-    )
+    except Exception as e:
+        print(f"Error connecting to database: {e}", file=sys.stderr)
+        response = {"message": "Internal Server Error", "status": 500}
+
+    finally:
+        conn.close()
+
+    print(f"LOGIN: {response['message']}", file=sys.stderr)
+    return jsonify(response), response["status"]
 
 
 @auth_blueprint.route("/register", methods=["POST"])
@@ -55,28 +57,14 @@ def register():
     if existing_user:
         return jsonify({"message": "Username already exists"}), 409
 
-    print(f"REGISTERING: {username}, {password}", file=sys.stderr)
+    # Hash the password before storing it
+    hashed_password = hash_password(password)
+
+    print(f"REGISTERING: {username}, {hashed_password}", file=sys.stderr)
     cursor.execute(
-        "INSERT INTO users (username, password) VALUES (?, ?)", (username, password)
+        "INSERT INTO users (username, password) VALUES (?, ?)",
+        (username, hashed_password),
     )
     conn.commit()
     conn.close()
     return jsonify({"message": "Registration Complete!"})
-
-
-@auth_blueprint.route("/logout")
-def logout():
-    # Clear session data upon logout
-    session.pop("logged_in", None)
-    session.pop("username", None)
-    return jsonify({"message": "Logged out"})
-
-
-@auth_blueprint.route("/protected")
-def protected():
-    # Check if user is logged in before accessing this endpoint
-    if "logged_in" in session and session["logged_in"]:
-        return jsonify(
-            {"message": "You are logged in! Access granted to protected endpoint"}
-        )
-    return jsonify({"message": "You are not logged in! Access denied"}), 401

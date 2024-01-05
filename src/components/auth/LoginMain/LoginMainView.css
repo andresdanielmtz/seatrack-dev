@@ -1,0 +1,37 @@
+
+
+.outer {
+    margin: 0.3125rem; /* 5px / 16px = 0.3125rem */
+  }
+  
+  .button {
+    border: 0.15rem solid black;
+    /* Adjust thickness as needed */
+  
+    width: 14rem;
+    height: 2.5rem;
+    display: block;
+    background: linear-gradient(to right, black 50%, hsla(0, 0%, 100%, 0) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-position: left bottom;
+    background-size: 200% 100%;
+  }
+  
+  .text {
+    text-align: center;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 300;
+    color: black;
+    transition: all .4s ease-in-out;
+    display: block;
+  }
+  
+  .button:hover .text {
+    color: white;
+  }
