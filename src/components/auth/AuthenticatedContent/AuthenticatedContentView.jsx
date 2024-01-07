@@ -27,15 +27,19 @@ const AuthenticatedContent = ({
         <div>
           {showMap ? (
             <div>
-              <MapView zoom={2} />
-              <button onClick={handleLogout}>Logout</button>
-              <button onClick={toggleMap}>Toggle Map</button>
+              <MapView
+                zoom={2}
+                handleLogout={handleLogout}
+                toggleMap={toggleMap}
+              />
             </div>
           ) : (
             <div>
-              <MainView username={username} />
-              <button onClick={handleLogout}>Logout</button>
-              <button onClick={toggleMap}>Toggle Map</button>
+              <MainView
+                username={username}
+                handleLogout={handleLogout}
+                toggleMap={toggleMap}
+              />
             </div>
           )}
         </div>
