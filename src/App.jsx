@@ -8,6 +8,7 @@ import Routing from "./Routes.jsx";
 function App() {
   axios.defaults.baseURL = `http://localhost:5000`;
 
+
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(""); // Local state for username
