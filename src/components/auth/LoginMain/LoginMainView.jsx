@@ -20,7 +20,7 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
   const handleLogin = () => {
     axios
       .post(
-        "/login",
+        "http://3.101.63.33/login",
         {
           username: username,
           password: password,
