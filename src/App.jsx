@@ -6,8 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Routing from "./Routes.jsx";
 
 function App() {
-  axios.defaults.baseURL = `http://localhost:5000`;
-
+  axios.defaults.baseURL = `http://3.101.63.33/`;
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
