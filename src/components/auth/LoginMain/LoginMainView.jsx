@@ -19,10 +19,19 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
 
   const handleLogin = () => {
     axios
-      .post("/login", {
-        username: username,
-        password: password,
-      })
+      .post(
+        "/login",
+        {
+          username: username,
+          password: password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           handleLoginSuccess();
