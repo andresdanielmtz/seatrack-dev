@@ -1,11 +1,9 @@
+// TitleButton.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./TitleButton.css";
+import "./TitleButton.css"; // Keep this import if needed for specific styles
 
-/**
- * TODO: Change to Link component
- */
-const TitleButton = ({ text, address }) => {
+const TitleButton = ({ text, address, color }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -17,12 +15,12 @@ const TitleButton = ({ text, address }) => {
   };
 
   return (
-    <div className="outer">
+    <div className="m-2">
       <button
-        className="button relative overflow-hidden transition-all ease-out"
         onClick={handleClick}
+        className={`transition-all ease-out inline-block ${color} border border-gray-400 hover:bg-opacity-80 text-white font-semibold px-4 py-2 rounded focus:outline-none`}
       >
-        <span className="text">{text}</span>
+        {text}
       </button>
     </div>
   );

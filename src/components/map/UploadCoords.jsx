@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function UploadCoordsForm( {toggleMapComponent}) {
+function UploadCoordsForm({ toggleMapComponent }) {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [name, setName] = useState("");

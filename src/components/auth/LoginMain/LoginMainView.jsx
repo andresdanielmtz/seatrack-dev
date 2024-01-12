@@ -1,26 +1,24 @@
-// LoginView.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./LoginMainView.css";
 
 const LoginView = ({ setIsLoggedIn, setUsername }) => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
-  const [username, setUsernameLocal] = useState(""); // Add this line
+  const [username, setUsernameLocal] = useState("");
 
   const handleLoginSuccess = () => {
-    setIsLoggedIn(true); // Set isLoggedIn in the parent component
-    setUsername(username); // Set the username in the parent component
-    toast.success("Login successful!"); // Show success notification
+    setIsLoggedIn(true);
+    setUsername(username);
+    toast.success("Login successful!");
     navigate("/");
   };
 
   const handleLogin = () => {
     axios
       .post(
-        "http://3.101.63.33/login",
+        "/login",
         {
           username: username,
           password: password,
@@ -47,20 +45,17 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
         }
       });
   };
-
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-amber-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-white">
       <h1 className="text-4xl font-extrabold my-10">Login</h1>
-      {/* Username input */}
       <input
         type="text"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsernameLocal(e.target.value)}
-        className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500"
+        className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500 "
       />
 
-      {/* Password input */}
       <input
         type="password"
         placeholder="Password"
@@ -70,13 +65,17 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
       />
 
       <div className="flex flex-col justify-between my-10">
-        <button className="button my-3" onClick={handleLogin}>
-          {" "}
+        <button
+          className="bg-blue-500 !text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
+          onClick={handleLogin}
+        >
           <span className="text">Login</span>
         </button>
 
-        <button className="button" onClick={() => navigate("/")}>
-          {" "}
+        <button
+          className="bg-gray-200 text-gray-800 py-2 px-4 rounded-l"
+          onClick={() => navigate("/")}
+        >
           <span className="text">Return to Home</span>
         </button>
       </div>
