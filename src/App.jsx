@@ -6,7 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Routing from "./Routes.jsx";
 
 function App() {
-  axios.defaults.baseURL = "https://seatrack-dev-back.onrender.com/";
+  const baseURL = import.meta.env.VITE_REACT_APP_URL_SEATRACK;
+  axios.defaults.baseURL = baseURL;
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);

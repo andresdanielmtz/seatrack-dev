@@ -79,7 +79,7 @@ function MainView({ username, handleLogout, toggleMap }) {
           </button>
         </div>
 
-        <UploadCoordsForm toggleMapComponent={toggleMapComponent} />
+        <UploadCoordsForm username = {username} toggleMapComponent={toggleMapComponent} />
       </div>
 
       {/* Map component */}

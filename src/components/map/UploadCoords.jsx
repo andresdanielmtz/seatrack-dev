@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function UploadCoordsForm({ toggleMapComponent }) {
+function UploadCoordsForm({ toggleMapComponent, username }) {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [name, setName] = useState("");
@@ -33,7 +33,7 @@ function UploadCoordsForm({ toggleMapComponent }) {
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Title"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="rounded-md border p-2 w-full"
