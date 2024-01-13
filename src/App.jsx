@@ -7,7 +7,7 @@ import Routing from "./Routes.jsx";
 
 function App() {
   const baseURL = import.meta.env.VITE_REACT_APP_URL_SEATRACK;
-  axios.defaults.baseURL = baseURL;
+  axios.defaults.baseURL = baseURL || "http://localhost:3000";
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
