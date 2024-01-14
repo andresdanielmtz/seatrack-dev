@@ -1,6 +1,6 @@
 // AuthenticatedContent.jsx
 import React from "react";
-import MapView from "../../Map/MapView.jsx";
+import MapView from "../../map/MapView.jsx";
 import MainView from "./MainView.jsx";
 import MainTitleView from "../MainTitle/MainTitleView.jsx";
 

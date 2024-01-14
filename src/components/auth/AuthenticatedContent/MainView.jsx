@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SettingsIcon from "../../icons/SettingsIcon.jsx";
-import MapUploadView from "../../Map/MapUploadView.jsx";
-import UploadCoordsForm from "../../Map/UploadCoords.jsx";
+import MapUploadView from "../../map/MapUploadView.jsx";
+import UploadCoordsForm from "../../map/UploadCoords.jsx";
 import { useTransition, animated, config, useSpring } from "@react-spring/web";
 
 function MainView({ username, handleLogout, toggleMap }) {
