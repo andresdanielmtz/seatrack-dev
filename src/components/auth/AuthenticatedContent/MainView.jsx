@@ -85,9 +85,8 @@ function MainView({ username, handleLogout, toggleMap }) {
                 <p className="italic text-center mb-2">
                   Pick a location from the map below
                   <br />
-                  <i className="text-red-600	"> (In development)</i>
                 </p>
-                <MapUploadView zoom={3}  />
+                <MapUploadView zoom={3} />
               </div>
             </animated.div>
           )

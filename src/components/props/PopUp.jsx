@@ -39,6 +39,10 @@ export default function PopUp({ onClose, latitude, longitude }) {
   }
 
   function uploadButtonHandler() {
+    if (title === "") {
+      toast.error("Please enter a title.");
+      return;
+    }
     uploadCoords();
     onClose();
   }
@@ -71,7 +75,6 @@ export default function PopUp({ onClose, latitude, longitude }) {
             If so, fill out the form below and click "Upload".
             <br />
             <div className="mb-4">
-
               <input
                 type="text"
                 placeholder="Title"

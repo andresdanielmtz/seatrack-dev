@@ -10,7 +10,6 @@ export default function MainTitleView() {
         <p className="text-lg italic mb-8 justify-center">
           Welcome to the future of Debris Tracking
           <br />
-          <i className="fas fa-rocket fa-10x mb-2">In development!</i>
         </p>
       </div>
 
@@ -23,6 +22,10 @@ export default function MainTitleView() {
         </TitleButton>
         <TitleButton address="about" color="bg-persian-blue-500">
           About Us
+        </TitleButton>
+
+        <TitleButton address="instructions" color="bg-persian-blue-500">
+          Instructions
         </TitleButton>
       </div>
     </div>

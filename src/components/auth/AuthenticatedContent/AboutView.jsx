@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import TitleButton from "../MainTitle/TitleButton";
 
 export default function ProfileView() {
   const [name, setName] = useState("");
@@ -48,12 +49,12 @@ export default function ProfileView() {
             )}
           </p>
         )}
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-xl my-5"
-          onClick={redirectToHome}
-        >
-          Return to Home
-        </button>
+        <div className="flex flex-col">
+          <i className="text-red-500"> In development!</i>
+          <TitleButton address="/" color="bg-persian-blue-500">
+            Go Back
+          </TitleButton>
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import RegisterView from "./components/auth/AuthenticatedContent/RegisterView.js
 import AboutView from "./components/auth/AuthenticatedContent/AboutView.jsx";
 import AuthenticatedContent from "./components/auth/AuthenticatedContent/AuthenticatedContentView.jsx";
 import SettingsView from "./components/auth/AuthenticatedContent/SettingsView.jsx";
+import InstructionView from "./components/auth/AuthenticatedContent/InstructionView.jsx";
 
 const Routing = ({
   setIsLoggedIn,
@@ -39,6 +40,7 @@ const Routing = ({
         }
       />
       <Route path="/settings" element={<SettingsView />} />
+      <Route path="/instructions" element={<InstructionView />} />
     </Routes>
   );
 };
