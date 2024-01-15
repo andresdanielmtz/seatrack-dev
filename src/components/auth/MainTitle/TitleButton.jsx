@@ -3,12 +3,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./TitleButton.css"; // Keep this import if needed for specific styles
 
-const TitleButton = ({ text, address, color }) => {
+const TitleButton = ({ children, address, color }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
     try {
-      navigate(`/${address}`);
+      if (address === "/" || address === "") {
+        navigate("/");
+      } else {
+        navigate(`/${address}`);
+      }
     } catch (error) {
       console.error("Navigation error:", error);
     }
@@ -20,7 +24,7 @@ const TitleButton = ({ text, address, color }) => {
         onClick={handleClick}
         className={`transition-all ease-out inline-block ${color} border border-gray-400 hover:bg-opacity-80 text-white font-semibold px-4 py-2 rounded focus:outline-none`}
       >
-        {text}
+        {children}
       </button>
     </div>
   );

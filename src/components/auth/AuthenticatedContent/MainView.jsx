@@ -79,7 +79,10 @@ function MainView({ username, handleLogout, toggleMap }) {
           </button>
         </div>
 
-        <UploadCoordsForm username = {username} toggleMapComponent={toggleMapComponent} />
+        <UploadCoordsForm
+          username={username}
+          toggleMapComponent={toggleMapComponent}
+        />
       </div>
 
       {/* Map component */}
@@ -90,6 +93,8 @@ function MainView({ username, handleLogout, toggleMap }) {
               <div className="max-w-2xl mx-auto bg-white p-8 rounded-3xl shadow-md mt-10">
                 <p className="italic text-center mb-2">
                   Pick a location from the map below
+                  <br />
+                  <i className="text-red-600	"> (In development)</i>
                 </p>
                 <MapUploadView zoom={3} />
               </div>
