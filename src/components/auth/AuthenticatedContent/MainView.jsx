@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SettingsIcon from "../../icons/SettingsIcon.jsx";
 import MapUploadView from "../../map/MapUploadView.jsx";
 import UploadCoordsForm from "../../map/UploadCoords.jsx";
+import LoadingTemplate from "../../props/LoadingTemplate.jsx";
 import { useTransition, animated, config, useSpring } from "@react-spring/web";
 
 function MainView({ username, handleLogout, toggleMap }) {
@@ -38,17 +39,7 @@ function MainView({ username, handleLogout, toggleMap }) {
 
   if (loading) {
     // Render loading skeleton structure
-    return (
-      <div className="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-md mt-10">
-        {/* Loading skeleton structure */}
-        <div className="animate-pulse">
-          <div className="bg-gray-300 h-6 w-2/3 mb-4 rounded"></div>
-          <div className="bg-gray-300 h-4 w-1/2 mb-2 rounded"></div>
-          <div className="bg-gray-300 h-4 w-3/4 mb-2 rounded"></div>
-          {/* Add more skeleton elements based on your design */}
-        </div>
-      </div>
-    );
+    return <LoadingTemplate />;
   }
 
   return (
@@ -96,7 +87,7 @@ function MainView({ username, handleLogout, toggleMap }) {
                   <br />
                   <i className="text-red-600	"> (In development)</i>
                 </p>
-                <MapUploadView zoom={3} />
+                <MapUploadView zoom={3}  />
               </div>
             </animated.div>
           )

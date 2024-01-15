@@ -1,13 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
+import axios from "axios";
 import { transform } from "ol/proj"; // Import the transform function
 import "ol/ol.css";
+import PopUp from "../props/PopUp";
 
 function MapUploadView({ zoom = 1 }) {
   const mapRef = useRef(null);
   const clickStartPosition = useRef(null);
+
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const closePopUp = () => {
+    setIsPopUpOpen(false);
+  };
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -55,6 +64,11 @@ function MapUploadView({ zoom = 1 }) {
         if (distance < 5) {
           const lonLat = transform(coordinate, "EPSG:3857", "EPSG:4326");
           console.log("Clicked coordinates (lon/lat):", lonLat);
+          console.log("Longitude:", lonLat[0], "Latitude:", lonLat[1]);
+
+          setLatitude(lonLat[1]);
+          setLongitude(lonLat[0]);
+          setIsPopUpOpen(true);
         } else {
           console.log("Drag detected. Ignoring click.");
         }
@@ -80,6 +94,10 @@ function MapUploadView({ zoom = 1 }) {
 
   return (
     <div style={{ position: "relative" }}>
+      {isPopUpOpen && (
+        <PopUp onClose={closePopUp} latitude={latitude} longitude={longitude} />
+      )}{" "}
+      {/* Pass onClose prop to PopUp component */}
       <div id="map" style={{ width: "38rem", height: "20rem" }} />
     </div>
   );
