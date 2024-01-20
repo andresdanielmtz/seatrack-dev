@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import TitleButton from "../MainTitle/TitleButton";
 
 const LoginView = ({ setIsLoggedIn, setUsername }) => {
   const navigate = useNavigate();
@@ -13,6 +12,10 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
     setIsLoggedIn(true);
     setUsername(username);
     toast.success("Login successful!");
+    navigate("/");
+  };
+
+  const handleReturnHome = () => {
     navigate("/");
   };
 
@@ -65,17 +68,20 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
         className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500"
       />
 
-      <div className="flex flex-col justify-between my-10">
+      <div className="flex flex-col justify-between my-10 text-white">
         <button
-          className="bg-blue-500  font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
+          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
           onClick={handleLogin}
         >
           <span className="text">Login</span>
         </button>
 
-        <TitleButton address="/" color="bg-persian-blue-700" className="my-3">
-          Return to Home
-        </TitleButton>
+        <button
+          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3 focus:text-red-600"
+          onClick={handleReturnHome}
+        >
+          <span className="text">Return to Home</span>
+        </button>
       </div>
     </div>
   );
