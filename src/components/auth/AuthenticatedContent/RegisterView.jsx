@@ -3,13 +3,20 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import SignUpPopUp from "../../props/SignUpPopUp";
 
 export default function RegisterView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPopUp, setShowPopUp] = useState(false); // sign up pop up
 
   const navigate = useNavigate();
+
+  const closePopUp = () => {
+    setShowPopUp(false);
+    navigate("/");
+  };
 
   const handleRegister = () => {
     setLoading(true);
@@ -39,12 +46,15 @@ export default function RegisterView() {
       })
       .finally(() => {
         setLoading(false);
+        setShowPopUp(true);
       });
   };
 
   return (
     <>
       <div className="max-w-md mx-auto mt-10">
+        {showPopUp ? <SignUpPopUp onClose={closePopUp} /> : null}
+
         <div className="flex flex-col items-center justify-center h-screen bg-white p-8 rounded-3xl shadow-md">
           <h1 className="text-4xl font-extrabold my-10">Register</h1>
 

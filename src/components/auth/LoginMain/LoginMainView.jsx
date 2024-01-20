@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import TitleButton from "../MainTitle/TitleButton";
 
 const LoginView = ({ setIsLoggedIn, setUsername }) => {
   const navigate = useNavigate();
@@ -66,18 +67,15 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
 
       <div className="flex flex-col justify-between my-10">
         <button
-          className="bg-blue-500 !text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
+          className="bg-blue-500  font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
           onClick={handleLogin}
         >
           <span className="text">Login</span>
         </button>
 
-        <button
-          className="bg-gray-200 text-gray-800 py-2 px-4 rounded-l"
-          onClick={() => navigate("/")}
-        >
-          <span className="text">Return to Home</span>
-        </button>
+        <TitleButton address="/" color="bg-persian-blue-700" className="my-3">
+          Return to Home
+        </TitleButton>
       </div>
     </div>
   );
