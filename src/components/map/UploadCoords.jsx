@@ -7,6 +7,15 @@ function UploadCoordsForm({ toggleMapComponent, username }) {
   const [longitude, setLongitude] = useState("");
   const [name, setName] = useState("");
 
+  function handleUploadCoords() {
+    // Upload coordinates to database, handle errors and success
+    if (latitude === "" || longitude === "" || name === "") {
+      toast.error("Please fill out all fields.");
+    } else {
+      uploadCoords();
+    }
+  }
+
   function uploadCoords() {
     axios({
       method: "POST",
@@ -59,7 +68,7 @@ function UploadCoordsForm({ toggleMapComponent, username }) {
       </div>
       <div className="flex flex-row my-2">
         <button
-          onClick={uploadCoords}
+          onClick={handleUploadCoords}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Upload
