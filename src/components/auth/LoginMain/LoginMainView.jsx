@@ -68,19 +68,21 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
         className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500"
       />
 
-      <div className="flex flex-col justify-between my-10 text-white">
+      <div className="flex flex-col justify-between my-10">
         <button
-          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3"
+          className="bg-blue-500 font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3 text-white"
           onClick={handleLogin}
+          id="loginButton"
         >
-          <span className="text">Login</span>
+          <span>Login</span>
         </button>
 
         <button
-          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3 focus:text-red-600"
+          className="bg-blue-500 font-semibold px-4 py-2 rounded hover:bg-blue-700 my-3  text-white"
           onClick={handleReturnHome}
+          id="loginButton"
         >
-          <span className="text">Return to Home</span>
+          <span>Return to Home</span>
         </button>
       </div>
     </div>

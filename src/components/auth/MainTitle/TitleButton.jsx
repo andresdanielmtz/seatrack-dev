@@ -22,7 +22,7 @@ const TitleButton = ({ children, address, color }) => {
     <div className="m-2">
       <button
         onClick={handleClick}
-        className={`transition-all ease-out inline-block ${color} border border-gray-400 hover:bg-opacity-80 text-white font-semibold px-4 py-2 rounded focus:outline-none`}
+        className={`transition-all ease-out inline-block ${color} text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800`}
       >
         {children}
       </button>
