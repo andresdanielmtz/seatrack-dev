@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "dev-front": "vite"
+    "dev-front": "vite",
+    "localback": "VITE_REACT_APP_URL_SEATRACK=http://127.0.0.1:5000 vite"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",

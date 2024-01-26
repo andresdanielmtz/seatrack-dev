@@ -4,9 +4,6 @@ import axios from "axios";
 import TitleButton from "../MainTitle/TitleButton";
 
 export default function ProfileView() {
-  const [name, setName] = useState("");
-  const [about, setAbout] = useState("");
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const redirectToHome = () => {
@@ -17,45 +14,22 @@ export default function ProfileView() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/profile");
-        setName(response.data.name);
-        setAbout(response.data.about);
-      } catch (error) {
-        console.error("Error fetching profile content:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="text-center">
-        <h3 className="text-2xl font-semibold mb-4">Profile</h3>
-        {loading ? (
-          <p>Loading profile content...</p>
-        ) : (
-          <p className="text-lg">
-            {name} <br /> {about}
-            <br />
-            {!loading && (
-              <p className="text-sm text-gray-500 mt-2">
-                If this piece of text loads, everything is working fine.
-              </p>
-            )}
-          </p>
-        )}
-        <div className="flex flex-col">
-          <i className="text-red-500"> In development!</i>
-          <TitleButton address="/" color="bg-persian-blue-500">
-            Go Back
-          </TitleButton>
-        </div>
-      </div>
+    <div className="flex items-center justify-center h-screen flex-col mx-10">
+      <h1 className="text-4xl font-extrabold my-10">About Us</h1>
+
+      <p className="text-lg italic mb-8 justify-center">
+        Hello! I'm Andrés Martínez and I'm a Computer Science student @ ITESM.
+        <br />
+        <br />I created this project for learning and practicing purposes.
+        <br /> This project helped me learn about React, Node.js, Express,
+        MongoDB, and many other technologies.
+      </p>
+
+      <TitleButton address="/" color="bg-persian-blue-700">
+        {" "}
+        Return to Home{" "}
+      </TitleButton>
     </div>
   );
 }
