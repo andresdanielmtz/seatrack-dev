@@ -8,8 +8,16 @@ const TitleButton = ({ children, address, color }) => {
 
   const handleClick = () => {
     try {
-      const newPath = address ? `/${address}` : "/";
+      /**
+       * If address == "" => Navigate to /
+       * If address == "/" => Navigate to /
+       * if address == "login" => Navigate to /login
+       */
+  
+      const newPath = address === "/" ? address : `/${address}`;
       navigate(newPath);
+
+      
     } catch (error) {
       console.error("Navigation error:", error);
     }

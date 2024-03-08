@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,7 +7,7 @@ import Routing from "./Routes.jsx";
 
 function App() {
   const baseURL = import.meta.env.VITE_REACT_APP_URL_SEATRACK;
-  axios.defaults.baseURL = baseURL || "http://127.0.0.1:5000";
+  axios.defaults.baseURL = "http://127.0.0.1:5000";
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,9 +29,8 @@ function App() {
       })
       .catch((error) => {
         console.error("Logout error: ", error);
-        // Handle logout error, e.g., display an error message
         console.log(error.message);
-        toast.error("Error logging out. Please try again."); // Show error notification
+        toast.error("Error logging out. Please try again.");
       });
   };
 

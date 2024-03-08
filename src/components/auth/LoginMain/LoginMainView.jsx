@@ -7,6 +7,7 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [username, setUsernameLocal] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
@@ -42,9 +43,9 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log("Request canceled:", error.message);
+          toast.error("Error Logging in: Request Cancelled");
         } else {
-          console.log(`Credentials: ${username} , ${password}`);
-          console.error("Login error: ", error);
+          console.error("Login error: ", error.message);
           toast.error("Error logging in. Please try again.");
         }
       });
@@ -52,6 +53,14 @@ const LoginView = ({ setIsLoggedIn, setUsername }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white">
       <h1 className="text-4xl font-extrabold my-10">Login</h1>
+
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="bg-white border border-gray-300 px-4 py-2 rounded-md mb-4 focus:outline-none focus:border-indigo-500 "
+      />
       <input
         type="text"
         placeholder="Username"

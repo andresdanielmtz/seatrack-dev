@@ -10,6 +10,7 @@ export default function RegisterView() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false); // sign up pop up
+  const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ export default function RegisterView() {
       .post("/register", {
         username: username,
         password: password,
+        email: email,
       })
       .then((response) => {
         toast.success("Registration successful!");
@@ -58,6 +60,15 @@ export default function RegisterView() {
         <div className="flex flex-col items-center justify-center h-screen bg-white p-8 rounded-3xl shadow-md">
           <h1 className="text-4xl font-extrabold my-10">Register</h1>
 
+          <input
+            type="text"
+            id="username"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="rounded-md border p-2 w-full mb-5"
+          />
+          
           <input
             type="text"
             id="username"
