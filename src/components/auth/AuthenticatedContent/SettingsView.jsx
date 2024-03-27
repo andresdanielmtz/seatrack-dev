@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch, FormLabel, FormControl } from "@chakra-ui/react";
 import TitleButton from "../MainTitle/TitleButton.jsx";
 

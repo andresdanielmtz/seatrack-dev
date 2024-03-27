@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
 
 const LoginView = ({ setIsLoggedIn, setUsername }) => {
+  LoginView.propTypes = {
+    setIsLoggedIn: PropTypes.func.isRequired,
+    setUsername: PropTypes.func.isRequired,
+  };
+
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [username, setUsernameLocal] = useState("");

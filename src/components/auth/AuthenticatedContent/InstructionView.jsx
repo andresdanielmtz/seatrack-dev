@@ -1,4 +1,3 @@
-import React from "react";
 import TitleButton from "../MainTitle/TitleButton";
 const InstructionView = () => {
   return (

@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SettingsIcon from "../../icons/SettingsIcon.jsx";
 import MapUploadView from "../../Map/MapUploadView.jsx";
 import UploadCoordsForm from "../../Map/UploadCoords.jsx";
 import LoadingTemplate from "../../props/LoadingTemplate.jsx";
 import { useTransition, animated, config, useSpring } from "@react-spring/web";
-
+import PropTypes from "prop-types";
 function MainView({ username, handleLogout, toggleMap }) {
+  MainView.propTypes = {
+    username: PropTypes.string.isRequired,
+    handleLogout: PropTypes.func.isRequired,
+    toggleMap: PropTypes.func.isRequired,
+  };
   const [loading, setLoading] = useState(true);
   const [showMapComponent, setShowMapComponent] = useState(false);
 
@@ -45,7 +50,6 @@ function MainView({ username, handleLogout, toggleMap }) {
   return (
     <div>
       <div className="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-md mt-10">
-        {/* Your main view content goes here */}
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-2xl font-semibold mb-4">Welcome, {username}!</h3>
           <Link to="/settings" className="text-blue-500">
@@ -53,7 +57,6 @@ function MainView({ username, handleLogout, toggleMap }) {
           </Link>
         </div>
 
-        {/* Your actual content */}
         <div className="flex flex-row space-x-4">
           <button
             onClick={toggleMap}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ export default function RegisterView() {
         password: password,
         email: email,
       })
-      .then((response) => {
+      .then(() => {
         toast.success("Registration successful!");
       })
       .catch((error) => {

@@ -1,5 +1,3 @@
-// MainTitleView.jsx
-import React from "react";
 import TitleButton from "./TitleButton.jsx";
 
 export default function MainTitleView() {

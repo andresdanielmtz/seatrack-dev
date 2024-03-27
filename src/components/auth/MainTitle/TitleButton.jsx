@@ -1,23 +1,24 @@
-// TitleButton.jsx
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./TitleButton.css"; // Keep this import if needed for specific styles
-
+import "./TitleButton.css";
+import PropTypes from "prop-types";
 const TitleButton = ({ children, address, color }) => {
+  TitleButton.propTypes = {
+    children: PropTypes.node.isRequired,
+    address: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+  };
   const navigate = useNavigate();
 
   const handleClick = () => {
     try {
-      /**
+      /*
        * If address == "" => Navigate to /
        * If address == "/" => Navigate to /
        * if address == "login" => Navigate to /login
        */
-  
+
       const newPath = address === "/" ? address : `/${address}`;
       navigate(newPath);
-
-      
     } catch (error) {
       console.error("Navigation error:", error);
     }

@@ -1,8 +1,7 @@
-// AuthenticatedContent.jsx
-import React from "react";
 import MapView from "../../Map/MapView.jsx";
 import MainView from "./MainView.jsx";
 import MainTitleView from "../MainTitle/MainTitleView.jsx";
+import PropTypes from "prop-types";
 
 /*
  *  This component is responsible for rendering the authenticated content.
@@ -21,6 +20,14 @@ const AuthenticatedContent = ({
   handleLogout,
   toggleMap,
 }) => {
+  AuthenticatedContent.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    showMap: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired,
+    handleLogout: PropTypes.func.isRequired,
+    toggleMap: PropTypes.func.isRequired,
+  };
+
   return (
     <div>
       {isLoggedIn ? (
